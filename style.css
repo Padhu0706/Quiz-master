@@ -2,9 +2,7 @@
    Quiz Generator — Styles
    Modern, responsive, animated UI
    ============================================ */
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --bg: #0f172a;
   --bg-2: #1e293b;
@@ -21,7 +19,6 @@
   --radius: 14px;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
 }
-
 html, body {
   min-height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -31,13 +28,11 @@ html, body {
               var(--bg);
   -webkit-font-smoothing: antialiased;
 }
-
 .app {
   max-width: 1100px;
   margin: 0 auto;
   padding: 28px 20px 60px;
 }
-
 /* Header */
 .header { text-align: center; padding: 16px 0 28px; }
 .logo {
@@ -49,7 +44,6 @@ html, body {
   letter-spacing: -.5px;
 }
 .tagline { color: var(--muted); margin-top: 6px; font-size: 14px; }
-
 /* Screens */
 .screen { display: none; animation: fadeIn .4s ease both; }
 .screen.active { display: block; }
@@ -57,21 +51,18 @@ html, body {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-
 .screen-title {
   text-align: center;
   font-size: clamp(20px, 3vw, 26px);
   margin: 10px 0 22px;
   color: var(--text);
 }
-
 /* Category Grid */
 .category-grid {
   display: grid;
   gap: 18px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
-
 .category-card {
   position: relative;
   background: linear-gradient(160deg, var(--surface), var(--bg-2));
@@ -94,7 +85,6 @@ html, body {
 .category-card .emoji { font-size: 38px; display: block; margin-bottom: 10px; }
 .category-card .title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
 .category-card .meta { font-size: 13px; color: var(--muted); }
-
 /* High Scores */
 .highscores {
   margin-top: 36px;
@@ -113,7 +103,6 @@ html, body {
   font-size: 14px;
 }
 .highscores li.empty { color: var(--muted); justify-content: center; }
-
 /* Quiz */
 .quiz-topbar {
   display: flex; align-items: center; justify-content: space-between;
@@ -134,7 +123,6 @@ html, body {
 .timer.warning { color: var(--warning); border-color: var(--warning); }
 .timer.danger  { color: var(--danger);  border-color: var(--danger); animation: pulse 1s infinite; }
 @keyframes pulse { 50% { transform: scale(1.06); } }
-
 .progress {
   height: 8px; background: var(--surface); border-radius: 999px; overflow: hidden;
   margin-bottom: 22px;
@@ -144,7 +132,6 @@ html, body {
   background: linear-gradient(90deg, var(--primary), var(--accent));
   transition: width .35s ease;
 }
-
 .question-card {
   background: var(--surface);
   border: 1px solid rgba(255,255,255,.06);
@@ -153,7 +140,6 @@ html, body {
   box-shadow: var(--shadow);
 }
 .question-text { font-size: clamp(17px, 2.2vw, 21px); line-height: 1.45; margin-bottom: 20px; }
-
 .options { display: grid; gap: 10px; }
 .option {
   text-align: left;
@@ -171,9 +157,7 @@ html, body {
 .option.correct  { border-color: var(--success); background: rgba(16,185,129,.18); }
 .option.wrong    { border-color: var(--danger);  background: rgba(239,68,68,.18); }
 .option:disabled { cursor: not-allowed; }
-
 .quiz-actions { display: flex; justify-content: flex-end; margin-top: 22px; }
-
 /* Buttons */
 .btn {
   font: inherit; cursor: pointer; border: none;
@@ -191,7 +175,6 @@ html, body {
   border: 1px solid rgba(255,255,255,.15);
 }
 .btn-ghost:hover { background: rgba(255,255,255,.05); }
-
 /* Results */
 .result-card {
   text-align: center;
@@ -206,7 +189,6 @@ html, body {
 .score-line span { color: var(--accent); font-weight: 700; }
 .score-message { color: var(--muted); margin-bottom: 22px; }
 .result-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
 .review-title { margin: 30px 0 14px; }
 .review { display: grid; gap: 12px; }
 .review-item {
@@ -219,10 +201,8 @@ html, body {
 .review-item .q { font-weight: 600; margin-bottom: 8px; }
 .review-item .a { font-size: 14px; color: var(--muted); }
 .review-item .a strong { color: var(--text); }
-
 /* Footer */
 .footer { text-align: center; color: var(--muted); margin-top: 40px; font-size: 13px; }
-
 /* Responsive tweaks */
 @media (max-width: 480px) {
   .app { padding: 18px 14px 40px; }
