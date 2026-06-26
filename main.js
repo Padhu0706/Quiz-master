@@ -4,7 +4,6 @@
    - Randomized questions, 30s per-question timer
    - Progress, scoring, review, high scores (localStorage)
    ========================================================= */
-
 // ---------- Question Bank (20+ per category) ----------
 const QUIZ_DATA = {
   ai: {
@@ -143,11 +142,9 @@ const QUIZ_DATA = {
     ]
   }
 };
-
 // ---------- App State ----------
 const TIME_PER_Q = 30; // seconds
 const HS_KEY = "quizgen_highscores_v1";
-
 const state = {
   categoryKey: null,
   questions: [],   // randomized for current session
@@ -159,7 +156,6 @@ const state = {
   timeLeft: TIME_PER_Q,
   locked: false
 };
-
 // ---------- DOM helpers ----------
 const $ = (sel) => document.querySelector(sel);
 const screens = {
@@ -172,7 +168,6 @@ function showScreen(name) {
   screens[name].classList.add("active");
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
 // ---------- Init ----------
 document.addEventListener("DOMContentLoaded", () => {
   renderCategories();
@@ -184,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderHighscores();
   });
 });
-
 // ---------- Landing: Categories ----------
 function renderCategories() {
   const grid = $("#categoryGrid");
@@ -201,7 +195,6 @@ function renderCategories() {
     grid.appendChild(card);
   });
 }
-
 // ---------- Start Quiz ----------
 function startQuiz(key) {
   const cat = QUIZ_DATA[key];
@@ -211,12 +204,10 @@ function startQuiz(key) {
   state.score = 0;
   state.answers = [];
   state.selected = null;
-
   $("#categoryLabel").textContent = `${cat.emoji} ${cat.name}`;
   showScreen("quiz");
   renderQuestion();
 }
-
 // Fisher-Yates shuffle
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -225,20 +216,17 @@ function shuffle(arr) {
   }
   return arr;
 }
-
 // ---------- Render Question ----------
 function renderQuestion() {
   const total = state.questions.length;
   const q = state.questions[state.index];
   state.selected = null;
   state.locked = false;
-
   $("#questionCounter").textContent = `${state.index + 1} / ${total}`;
   $("#progressBar").style.width = `${(state.index / total) * 100}%`;
   $("#questionText").textContent = q.q;
   $("#nextBtn").disabled = true;
   $("#nextBtn").textContent = state.index === total - 1 ? "Finish ✓" : "Next →";
-
   // Render options
   const optsWrap = $("#options");
   optsWrap.innerHTML = "";
@@ -249,19 +237,15 @@ function renderQuestion() {
     btn.addEventListener("click", () => selectOption(i, btn));
     optsWrap.appendChild(btn);
   });
-
   startTimer();
 }
-
 // ---------- Option Click ----------
 function selectOption(i, btn) {
   if (state.locked) return;
   state.locked = true;
   stopTimer();
-
   const q = state.questions[state.index];
   state.selected = i;
-
   // Visual feedback
   const buttons = document.querySelectorAll(".option");
   buttons.forEach((b, idx) => {
@@ -269,17 +253,13 @@ function selectOption(i, btn) {
     if (idx === q.a) b.classList.add("correct");
     if (idx === i && i !== q.a) b.classList.add("wrong");
   });
-
   if (i === q.a) state.score++;
-
   // Record answer
   state.answers.push({
     q: q.q, options: q.options, correct: q.a, picked: i
   });
-
   $("#nextBtn").disabled = false;
 }
-
 // ---------- Next / Finish ----------
 function handleNext() {
   if (state.index < state.questions.length - 1) {
@@ -289,7 +269,6 @@ function handleNext() {
     finishQuiz();
   }
 }
-
 // ---------- Timer ----------
 function startTimer() {
   state.timeLeft = TIME_PER_Q;
@@ -322,16 +301,13 @@ function updateTimerUI() {
   el.classList.toggle("warning", state.timeLeft <= 10 && state.timeLeft > 5);
   el.classList.toggle("danger",  state.timeLeft <= 5);
 }
-
 // ---------- Finish ----------
 function finishQuiz() {
   stopTimer();
   $("#progressBar").style.width = "100%";
-
   const total = state.questions.length;
   $("#finalScore").textContent = state.score;
   $("#totalScore").textContent = total;
-
   const pct = (state.score / total) * 100;
   let msg = "Keep practicing — you've got this!";
   if (pct === 100) msg = "Perfect score! Outstanding! 🏆";
@@ -339,12 +315,10 @@ function finishQuiz() {
   else if (pct >= 60) msg = "Good job — solid performance.";
   else if (pct >= 40) msg = "Not bad — review and try again.";
   $("#scoreMessage").textContent = msg;
-
   renderReview();
   saveHighscore(state.categoryKey, state.score, total);
   showScreen("results");
 }
-
 // ---------- Review ----------
 function renderReview() {
   const wrap = $("#review");
@@ -362,7 +336,6 @@ function renderReview() {
     wrap.appendChild(item);
   });
 }
-
 // ---------- High Scores (localStorage) ----------
 function loadHighscores() {
   try { return JSON.parse(localStorage.getItem(HS_KEY)) || []; }
